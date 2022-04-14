@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('Deploy') {
             steps {
+                echo %PATH%
                 dir('./app') {
                     sh 'npm install'
                     sh 'npm run build'
