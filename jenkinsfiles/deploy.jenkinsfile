@@ -6,8 +6,8 @@ pipeline {
     }
     
     stages {
-        stage('Deploy') {
-            dir('./app') {
+        dir('./app') {
+            stage('Deploy') {
                 steps {
                     sh 'npm install'
                     sh 'npm run build'
