@@ -1,0 +1,2 @@
+# VueAutoDeployTest
+Jenkinsを使ったVueプロジェクトの自動デプロイ実験
