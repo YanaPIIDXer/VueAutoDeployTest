@@ -11,6 +11,17 @@ pipeline {
                 dir('./app') {
                     sh 'npm install'
                     sh 'npm run build'
+                    withCredentials(
+                        [[
+                            $class: 'AmazonWebServicesCredentialsBinding',
+                            credentialsId: 'YanaPAWS',
+                            accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                            secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                        ]]
+                    ) {
+                        sh 'aws s3 cp ./dist/ s3://yanap-vue-app-test --include="*" --acl public-read --cache-control "max-age=3600"'
+                        sh 'aws cloudfront create-invalidation --distribution-id E3LIJNZQGD47Q8 --paths "/*"'
+                    }
                 }
             }
         }
